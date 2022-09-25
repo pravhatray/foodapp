@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+         margin: 0;
+       }
+        #navbar{
+          display: flex;
+          height: 50px;
+          align-items: center;
+          justify-content: space-around;
+          background-color: bisque;
+          gap: 20px;
+        }
+        #logSig{
+            display: flex;
+            gap: 20px;
+        }
+        #innerdiv{
+            display: flex;
+        }
+        #mealMake{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+
+    </nav>
+    <div id="container">
+           
+    </div>
+</body>
+</html>
+<style>
+    #Innerdiv{
+        display: flex;
+        /* height: 600px; */
+        gap: 30px;
+    }
+    #MMki{
+        display: flex;
+        width: 400px;
+        justify-content: space-around;
+    }
+    #Forimag{
+        height: 200px;
+        width: 300px;
+    }
+    #Forinfo{
+        margin-left: 50px;
+        gap: 20px;
+    }
+</style>
+<script type="module">
+    import navbar from "./components/navbar.js"
+    document.getElementById("navbar").innerHTML=navbar();
+    // console.log(Datatforapi)
+</script>
+<script>
+    // let id = 0
+     async function main(){
+        // var input = document.querySelector("#search").value
+        // console.log(input)
+        var Datatforapi = `https://themealdb.com/api/json/v1/1/search.php?s=s`
+        // console.log(Datatforapi)
+        let res = await fetch(Datatforapi);
+        let Data = await res.json();
+        var Mels_Arr = Data.meals
+        console.log(Mels_Arr)
+        ForAppend(Mels_Arr)
+    }
+    main()
+    
+    function ForAppend(Mels_Arr){
+        // var InnerHTML =  document.querySelector("#container");
+        //     InnerHTML.innerHTML = null
+
+        Mels_Arr.forEach(function(ele){
+            
+            var Forimag = document.createElement("img")
+                Forimag.setAttribute("src",ele.strMealThumb)
+                Forimag.setAttribute("id","Forimag")
+            
+            var Forinfo = document.createElement("div");
+                Forinfo.setAttribute("id","Forinfo")
+                
+            
+            var ForCity = document.createElement("h1");
+                ForCity.innerText=ele.strArea+"  "+ele.strMeal;
+               
+
+            var ForName = document.createElement("h3");
+                ForName.innerText=ele.strCategory;
+            
+            
+            var MMK1 = document.createElement("div");
+                MMK1.setAttribute("id","MMK1")
+
+            var FMake1 = document.createElement("h5");
+                FMake1.innerText = "Stap 1 : "+ele.strMeasure1+" "+ele.strIngredient1
+               
+
+            var FMake2 = document.createElement("h3");
+                FMake2.innerText = "Stap 2 : "+ele.strMeasure2+" "+ele.strIngredient2
+               
+
+            var FMake3 = document.createElement("h3");
+                FMake3.innerText = "Stap 3 : "+ele.strMeasure3+" "+ele.strIngredient3
+               
+            
+            var FMake4 = document.createElement("h3");
+                FMake4.innerText = "Stap 4 : "+ele.strMeasure4+" "+ele.strIngredient4
+               
+
+            var FMake5 = document.createElement("h3");
+                FMake5.innerText = "Stap 5 : "+ele.strMeasure5+" "+ele.strIngredient5
+               
+
+            var FMake6 = document.createElement("h3");
+                FMake6.innerText = "Stap 6 : "+ele.strMeasure6+" "+ele.strIngredient6
+               
+
+            var FMake7 = document.createElement("h3");
+                FMake7.innerText = "Stap 7 : "+ele.strMeasure7+" "+ele.strIngredient7
+            MMK1.append(FMake1,FMake2,FMake3,FMake4,FMake5,FMake6,FMake7)   
+            
+            var MMK2 = document.createElement("div");
+                MMK2.setAttribute("id","MMK2")
+            var FMake8 = document.createElement("h3");
+                FMake8.innerText = "Stap 8 : "+ele.strMeasure8+" "+ele.strIngredient8
+               
+            
+            var FMake9 = document.createElement("h3");
+                FMake9.innerText = "Stap 9 : "+ele.strMeasure9+" "+ele.strIngredient9
+               
+
+            var FMake10 = document.createElement("h3");
+                FMake10.innerText = "Stap 10 : "+ele.strMeasure10+" "+ele.strIngredient10
+                
+
+            var FMake11 = document.createElement("h3");
+                FMake11.innerText = "Stap 11 : "+ele.strMeasure11+" "+ele.strIngredient11
+                
+
+            var FMake12 = document.createElement("h3");
+                FMake12.innerText = "Stap 12 : "+ele.strMeasure12+" "+ele.strIngredient12
+                
+            var FMake13 = document.createElement("h3");
+                FMake13.innerText = "Stap 13 : "+ele.strMeasure13+" "+ele.strIngredient13
+                
+
+            var FMake14 = document.createElement("h3");
+                FMake14.innerText = "Stap 14 : "+ele.strMeasure14+" "+ele.strIngredient14
+                
+
+            var FMake15 = document.createElement("h3");
+                FMake15.innerText = "Stap 15 : "+ele.strMeasure15+" "+ele.strIngredient15
+            MMK2.append(FMake8,FMake9,FMake10,FMake11,FMake12,FMake13,FMake14,FMake15) 
+            
+            var MMki = document.createElement("div")
+                MMki.append(MMK1,MMK2)
+                MMki.setAttribute("id","MMki")
+
+            var FIntector = document.createElement("h6");
+                FIntector.innerText = ele.strInstructions  
+            
+            Forinfo.append(ForCity,ForName,MMki,FIntector)
+
+            var Innerdiv = document.createElement("div")
+                Innerdiv.append(Forimag,Forinfo);
+                Innerdiv.setAttribute("id","Innerdiv")
+            document.querySelector("#container").append(Innerdiv)
+        })
+    }
+</script>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+         margin: 0;
+       }
+        #navbar{
+          display: flex;
+          height: 50px;
+          align-items: center;
+          justify-content: space-around;
+          background-color: bisque;
+          gap: 20px;
+        }
+        #logSig{
+            display: flex;
+            gap: 20px;
+        }
+        #innerdiv{
+           /* border: 1px solid black; */
+           height: 300px;
+           width: 290px;
+        }
+        #img{
+          height:60%;
+          width:100%;
+        }
+        #container{
+            margin-top:20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #signup-form-div{
+    height: 350px;
+    width: 300px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-around;
+}
+#heding{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#form{
+    height: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+#button{
+    height: 30px;
+    width: 80px;
+    background-color: rgb(62, 164, 164);
+    border: 0;
+    color: white;
+    border-radius: 3px;
+}
+.inpu{
+   height: 25px;
+}
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        
+    </nav>
+    <div id="signup-form-div">
+        <h1 id="heding">Signup</h1>
+        <form id="form">
+            <!--Write form input elements here-->
+            <input class="inpu" id="name" type="text" placeholder="Enter your Name">
+            <input class="inpu" id="contect" type="number" placeholder="Enter your Contact">
+            <input class="inpu" id="email" type="email" placeholder="Enter your Email">
+            <input class="inpu" id="passw" type="password" placeholder="Enter your Password">
+            <input id="button" type="submit">
+        </form>
+    </div>
+</body>
+</html>
+<script type="module">
+    import navbar from "./components/navbar.js"
+    document.getElementById("navbar").innerHTML=navbar();
+    // console.log(Datatforapi)
+</script>
+<script>
+    var arr;
+    if(JSON.parse(localStorage.getItem("SignUpdata"))==null){
+        arr=[];
+    }
+    else{
+        arr=JSON.parse(localStorage.getItem("SignUpdata"))
+    }
+    // console.log(arr)
+     document.querySelector("#form").addEventListener("submit",forSginup);
+     function forSginup(){
+         event.preventDefault();
+
+         var name = document.querySelector("#name").value;
+         var num = 0;
+         if(name==""){
+             alert("Please Enter name")
+         }
+         else{
+             let count = 0;
+             for(i=0;i<arr.length;i++){
+                 if(arr[i]==name){
+                     count++
+                     break;
+                 }
+             }
+             if(count==0){
+                 arr.push(name)
+                 console.log(arr)
+                 num++
+             }
+             else{
+                 alert("This name is alrady in data Please Enter diffrent name")
+                 window.location.reload()
+             }
+         }
+
+         var contect = document.querySelector("#contect").value;
+         if(contect==""){
+             alert("Please Enter Mobile Number")
+         }
+         else{
+             let count = 0;
+             for(i=0;i<arr.length;i++){
+                 if(arr[i]==contect){
+                     count++
+                     break;
+                 }
+             }
+             if(count==0){
+                 arr.push(contect)
+                 console.log(arr)
+                 num++
+             }
+             else{
+                 alert("This number is alrady in data Please Enter diffrent number")
+                 window.location.reload()
+             }
+         }
+
+
+         var email = document.querySelector("#email").value;
+         if(email==""){
+             alert("Please Enter Email id")
+         }
+         else{
+             let count = 0;
+             for(i=0;i<arr.length;i++){
+                 if(arr[i]==email){
+                     count++
+                     break;
+                 }
+             }
+             if(count==0){
+                 arr.push(email)
+                 console.log(arr)
+                 num++
+             }
+             else{
+                 alert("This email is alrady in data Please Enter diffrent email")
+                 window.location.reload()
+             }
+         }
+
+         var passw = document.querySelector("#passw").value;
+         if(passw==""){
+             alert("Please Enter Mobile password")
+         }
+         else{
+             let count = 0;
+             for(i=0;i<arr.length;i++){
+                 if(arr[i]==passw){
+                     count++
+                     break;
+                 }
+             }
+             if(count==0){
+                 arr.push(passw)
+                 console.log(arr)
+                 num++
+             }
+             else{
+                 alert("This password is alrady in data Please Enter diffrent password")
+                 window.location.reload()
+             }
+         }
+         console.log(num)
+         if(num==4){
+             localStorage.setItem("SignUpdata",JSON.stringify(arr))
+             alert("Signup sucssesfully")
+             window.open("login.html")
+         }
+     }
+</script>

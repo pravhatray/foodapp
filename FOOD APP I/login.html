@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #login-form-div{
+    height: 250px;
+    width: 300px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-around;
+}
+#heding{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#form{
+    height: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+#button{
+    height: 30px;
+    width: 80px;
+    background-color: rgb(62, 164, 164);
+    border: 0;
+    color: white;
+    border-radius: 3px;
+}
+.inpu{
+   height: 25px;
+}
+     *{
+         margin: 0;
+       }
+        #navbar{
+          display: flex;
+          height: 50px;
+          align-items: center;
+          justify-content: space-around;
+          background-color: bisque;
+          gap: 20px;
+        }
+        #logSig{
+            display: flex;
+            gap: 20px;
+        }
+        #innerdiv{
+           /* border: 1px solid black; */
+           height: 300px;
+           width: 290px;
+        }
+        #img{
+          height:60%;
+          width:100%;
+        }
+        #container{
+            margin-top:20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        
+  </nav>
+  <div id="login-form-div">
+      <h1 id="heding">Login</h1>
+      <form id="form">
+          <!--Write form input elements here-->
+          <input class="inpu" id="email" type="email" placeholder="Enter your Email">
+          <input class="inpu" id="pwd" type="password" placeholder="Enter your Password">
+          <input id="button" type="submit">
+      </form>
+  </div>
+</body>
+</html>
+<script type="module">
+    import navbar from "./components/navbar.js"
+    document.getElementById("navbar").innerHTML=navbar();
+    // console.log(Datatforapi)
+</script>
+<script>
+    document.querySelector("#form").addEventListener("submit",forlogin);
+     function forlogin(){
+         event.preventDefault();
+         var getinfo = JSON.parse(localStorage.getItem("SignUpdata"));
+        //  console.log(getinfo)
+         var inputemali = document.querySelector("#email").value;
+        var inputpwd = document.querySelector("#pwd").value;
+        var count=0;
+        var count1 = 0;
+        var num = 0;
+        var pwd = 0;
+        var pwd2 = 0;
+        var count3 = 0;
+        var count2 = 0;
+        for(var j=0;j<getinfo.length;j++){
+            // console.log(getinfo[j])
+            if(getinfo[j]==inputemali){
+                pwd =(j)
+                count++
+            }
+            if(getinfo[j]!=inputemali){
+                count3++
+            }
+            if(getinfo[j]!=inputpwd){
+                count2++
+            }
+            
+            if(getinfo[j]==inputpwd){
+                pwd2 = (j)
+                count1++
+           }
+        }
+        if(count2==getinfo.length){
+            alert("please Enter valid passward")
+            window.location.reload()
+        }
+        if(count3==getinfo.length){
+            alert("please Enter valid email")
+            window.location.reload()
+        }
+        
+        if((pwd+1)==(pwd2)){
+            if(count>=1){
+                num++
+            }
+            if(count1>=1){
+                num++
+            }
+            if(num>=2){
+                alert("Sign in succsesfuly")
+                var LOGSIN = document.querySelector("#logSig")
+                    LOGSIN.innerHTML=null
+                document.querySelector("#logSig").append("User")
+                // window.open("index.html")
+            }
+        }
+        else if((pwd+1)!=(pwd2)){
+            alert("Please Enter valid email or password")
+        }
+     }
+</script>

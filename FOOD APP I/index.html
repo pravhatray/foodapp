@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>-=
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       *{
+         margin: 0;
+       }
+        #navbar{
+          display: flex;
+          height: 50px;
+          align-items: center;
+          justify-content: space-around;
+          background-color: bisque;
+          gap: 20px;
+        }
+        #logSig{
+            display: flex;
+            gap: 20px;
+        }
+        #innerdiv{
+           /* border: 1px solid black; */
+           height: 300px;
+           width: 290px;
+        }
+        #img{
+          height:60%;
+          width:100%;
+        }
+        #container{
+            margin-top:20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        
+    </nav>
+    <!-- <input type="text" oninput="ourmain()"> -->
+    <div id="container">
+
+    </div>
+</body>
+</html>
+<script type="module">
+    import navbar from "./components/navbar.js"
+    document.getElementById("navbar").innerHTML=navbar();
+    // console.log(Datatforapi)
+</script>
+<script>
+    let id = 0
+     async function main(){
+        var input = document.querySelector("#search").value
+        // console.log(input)
+        var Datatforapi = `https://themealdb.com/api/json/v1/1/search.php?s=${input}`
+        // console.log(Datatforapi)
+        let res = await fetch(Datatforapi);
+        let Data = await res.json();
+        var Mels_Arr = Data.meals
+        console.log(Mels_Arr)
+        ForAppend(Data.meals)
+    }
+    function debounceFunction(Formain,Ftime){
+        if(id){
+            clearTimeout(id);
+        }
+        id=setTimeout(function(){
+            Formain();
+        },Ftime)
+    }
+
+    function ForAppend(Mels_Arr){
+        var InnerHTML =  document.querySelector("#container");
+            InnerHTML.innerHTML = null
+        Mels_Arr.forEach(function(ele){
+            //  console.log(ele.strArea,ele.strCategory)
+            var Innerdiv = document.createElement("div");
+                Innerdiv.setAttribute("id","innerdiv")
+
+            var Forimag = document.createElement("img")
+                Forimag.setAttribute("src",ele.strMealThumb)
+                Forimag.setAttribute("id","img")
+            
+            var ForCity = document.createElement("h3");
+                ForCity.innerText=ele.strArea;
+
+            var ForName = document.createElement("h4");
+                ForName.innerText=ele.strCategory;
+            
+            var ForMeal = document.createElement("p");
+                ForMeal.innerText ="Meal : "+ ele.strMeal
+
+            Innerdiv.append(Forimag,ForCity,ForName,ForMeal);
+            document.querySelector("#container").append(Innerdiv)  
+        })
+    }
+
+// ______________________for Rendom_______________________________
+
+async function rendom(){
+        // console.log(input)
+        var Datatforapi = `https://themealdb.com/api/json/v1/1/search.php?s=`
+        // console.log(Datatforapi)
+        let res = await fetch(Datatforapi);
+        let Data = await res.json();
+        var Mels_Arr = Data.meals
+        ForrendomAppend(Mels_Arr)
+    }
+rendom()
+
+function ForrendomAppend(Mels_Arr){
+        // console.log(Mels_Arr)
+        Mels_Arr.forEach(function(ele){
+            //  console.log(ele.strArea,ele.strCategory)
+            var Innerdiv = document.createElement("div");
+                Innerdiv.setAttribute("id","innerdiv")
+
+            var Forimag = document.createElement("img")
+                Forimag.setAttribute("src",ele.strMealThumb)
+                Forimag.setAttribute("id","img")
+            
+            var ForCity = document.createElement("h3");
+                ForCity.innerText=ele.strArea;
+
+            var ForName = document.createElement("h4");
+                ForName.innerText=ele.strCategory;
+            
+            var ForMeal = document.createElement("p");
+                ForMeal.innerText ="Meal : "+ ele.strMeal
+
+            Innerdiv.append(Forimag,ForCity,ForName,ForMeal);
+            document.querySelector("#container").append(Innerdiv)  
+        })
+    }
+</script>
